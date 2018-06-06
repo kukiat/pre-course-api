@@ -7,7 +7,7 @@ const app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: false
 }))
 
 app.use('/api', router)
