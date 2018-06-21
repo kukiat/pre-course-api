@@ -53,3 +53,20 @@ export const findSectionBySectionId = (sectionId) => {
     })
     .catch(err => Promise.reject(err))
 }
+
+const findAllExam = () => {
+  return db.ref('exam').once('value')
+  .then(response => Promise.resolve(response.val()))
+  .catch(err => Promise.reject(err))
+}
+
+export const findExamByCourseId = (courseId) => {
+  return new Promise((resolve, reject) => {
+    findAllExam()
+      .then(exams => {
+        const exam = exams.filter(exam => exam.code === courseId)
+        resolve(exam)
+      })
+      .catch(err => reject(err))
+  })
+}
